@@ -1,7 +1,8 @@
+import LoginComponent from "@/components/loginform";
 import React from "react";
 
 const Login = () => {
-  return <div className="mx-auto">Login</div>;
+  return <LoginComponent />;
 };
 
 export default Login;
