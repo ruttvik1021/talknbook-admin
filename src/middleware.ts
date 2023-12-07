@@ -15,11 +15,8 @@ export default async function middlerware(req: NextRequest) {
     const isSuperAdmin = decoded.payload?.role === ROLES.SUPERADMIN;
     const dashboardUrl = new URL("/dashboard", req.nextUrl.origin);
     const loginURl = new URL("/login", req.nextUrl.origin);
-    console.log(isSuperAdmin);
     if (!isSuperAdmin) {
-      if (req.nextUrl.pathname !== "/login") {
-        return NextResponse.redirect(loginURl.toString());
-      }
+      return NextResponse.redirect(loginURl.toString());
     }
     if (
       (isSuperAdmin && req.nextUrl.pathname === "/login") ||
