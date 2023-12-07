@@ -5,7 +5,7 @@ export default function LoginLayout({
 }) {
   return (
     <>
-      <section className="flex justify-center items-center h-full w-full bg-[#cbf3f0]">
+      <section className="flex justify-center items-center h-full w-full bg-[#e7ecef]">
         {children}
       </section>
     </>

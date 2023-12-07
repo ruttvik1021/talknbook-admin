@@ -20,6 +20,7 @@ export enum fieldTypeEnums {
   TEXT = "text",
   PASSWORD = "password",
   TEXTAREA = "textarea",
+  NUMBER = "number",
 }
 
 const TextField = ({

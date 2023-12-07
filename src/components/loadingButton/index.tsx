@@ -5,22 +5,22 @@ import LoadingIcon from "../icons/loadingIcon";
 interface IButton {
   text: string;
   className?: string;
-  onClick: () => void;
-  isLoading: boolean;
+  onClick?: () => void;
+  isloading: boolean;
 }
 
-type IButtonProps = IButton & ButtonProps;
+type IButtonProps = ButtonProps & IButton;
 
 const LoadingButton = (props: IButtonProps) => {
-  const { className, isLoading, onClick, text } = props;
+  const { className, isloading, onClick, text } = props;
   return (
     <Button
       {...props}
-      disabled={isLoading}
+      disabled={isloading}
       onClick={onClick}
       className={`flex justify-center items-center ${className}`}
     >
-      {isLoading ? (
+      {isloading ? (
         <LoadingIcon className="w-full h-full animate-spin" />
       ) : (
         text

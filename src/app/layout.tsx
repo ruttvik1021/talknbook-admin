@@ -18,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryWrapper>{children}</QueryWrapper>
+        <QueryWrapper>
+          <div>{children}</div>
+        </QueryWrapper>
       </body>
     </html>
   );
