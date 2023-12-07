@@ -91,7 +91,10 @@ const LoginComponent = () => {
                 <Badge
                   variant={"outline"}
                   className="border border-red-500  cursor-pointer"
-                  onClick={() => setOtpSent(false)}
+                  onClick={() => {
+                    setOtpSent(false);
+                    loginFormik.resetForm();
+                  }}
                 >
                   Back
                 </Badge>
