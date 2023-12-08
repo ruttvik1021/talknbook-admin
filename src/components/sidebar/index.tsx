@@ -13,13 +13,8 @@ const Sidebar = () => {
       <p className="flex justify-around font-extralight text-sm">Admin</p>
       <div className="pl-5">
         {routes.map((item: navRoute, index: number) => (
-          <div className="my-5">
-            <NavLink
-              label={item.label}
-              href={item.href}
-              icon={item.icon}
-              key={`${item.href}-${index}`}
-            />
+          <div className="my-5" key={`${item.href}-${index}`}>
+            <NavLink label={item.label} href={item.href} icon={item.icon} />
           </div>
         ))}
       </div>

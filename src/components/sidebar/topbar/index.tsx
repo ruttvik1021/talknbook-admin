@@ -13,10 +13,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-// import { navRoute } from "@/utils/constants";
-// import NavLink from "../navlink";
-// import Cookies from "js-cookie";
-// import { routes } from "@/utils/urls";
+import { navRoute } from "@/utils/constants";
+import NavLink from "../navlink";
+import Cookies from "js-cookie";
+import { routes } from "@/utils/urls";
 
 const TopBar = () => {
   return (
@@ -33,21 +33,16 @@ const TopBar = () => {
           </SheetTitle>
           <SheetDescription>Admin</SheetDescription>
         </SheetHeader>
-        {/* <div className="pl-5">
+        <div className="pl-5">
           {routes.map((item: navRoute, index: number) => (
-            <div className="my-5">
-              <NavLink
-                label={item.label}
-                href={item.href}
-                icon={item.icon}
-                key={`${item.href}-${index}`}
-              />
+            <div className="my-5" key={`${item.href}-${index}`}>
+              <NavLink label={item.label} href={item.href} icon={item.icon} />
             </div>
           ))}
-        </div> */}
+        </div>
         <SheetFooter>
           <SheetClose asChild>
-            {/* <Button onClick={() => Cookies.remove("token")}>Logout</Button> */}
+            <Button onClick={() => Cookies.remove("token")}>Logout</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>
