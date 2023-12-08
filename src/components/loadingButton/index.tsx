@@ -12,19 +12,14 @@ interface IButton {
 type IButtonProps = ButtonProps & IButton;
 
 const LoadingButton = (props: IButtonProps) => {
-  const { className, isloading, onClick, text } = props;
+  const { isloading, text } = props;
   return (
     <Button
-      {...props}
-      disabled={isloading}
-      onClick={onClick}
-      className={`flex justify-center items-center ${className}`}
+      disabled={props.isloading}
+      onClick={props.onClick}
+      className={`flex justify-center items-center ${props.className}`}
     >
-      {isloading ? (
-        <LoadingIcon className="w-full h-full animate-spin" />
-      ) : (
-        text
-      )}
+      {isloading ? <LoadingIcon className="w-6 h-6 animate-spin" /> : text}
     </Button>
   );
 };
