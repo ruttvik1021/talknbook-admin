@@ -71,7 +71,7 @@ const LoginComponent = () => {
     mutationFn: loginFn,
     onSuccess: async (res: any) => {
       Cookies.set("token", res?.data?.accessToken);
-      route.push("/dashboard");
+      route.push("/admin");
     },
     onError: (error: any) => {
       loginFormik.setFieldError("otp", error.response?.data?.message);
