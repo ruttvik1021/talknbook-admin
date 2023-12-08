@@ -1,9 +1,8 @@
-import Sidebar from "@/components/sidebar";
-import TopBar from "@/components/sidebar/topbar";
-import { navRoute } from "@/utils/constants";
+import Sidebar from "@/components/navbars";
+import TopBar from "@/components/navbars/topbar";
 
 export default function AdminLayout({
-  children, // will be a page or nested layout
+  children,
 }: {
   children: React.ReactNode;
 }) {
@@ -16,7 +15,7 @@ export default function AdminLayout({
 
       {/* Main Content */}
       <div className="w-5/6 p-4">
-        <div>
+        <div className="md:hidden">
           <TopBar />
         </div>
         <div>{children}</div>

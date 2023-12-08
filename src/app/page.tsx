@@ -1,5 +1,5 @@
-import QueryWrapper from "@/components/queryWrapper";
+import Landing from "@/components/landing";
 
 export default function Home() {
-  return <></>;
+  return <Landing />;
 }

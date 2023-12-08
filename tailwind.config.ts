@@ -22,6 +22,8 @@ module.exports = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {
+        continueButton: "#22c55e",
+        loginBgTheme: "#e7ecef",
         theme: "#cbf3f0",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
