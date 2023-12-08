@@ -1,7 +1,7 @@
-import React from "react";
+import UsersComponent from "@/components/usersComponent";
 
 const Users = () => {
-  return <div>Users</div>;
+  return <UsersComponent />;
 };
 
 export default Users;

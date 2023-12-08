@@ -80,7 +80,7 @@ const LoginComponent = () => {
 
   return (
     <>
-      <Card className="card w-full md:w-1/3 lg:w-1/3">
+      <Card className="card w-full md:w-1/3 lg:w-1/3 border-green-500">
         <CardHeader>
           <CardTitle>Talk N Book</CardTitle>
         </CardHeader>
@@ -126,7 +126,7 @@ const LoginComponent = () => {
                     text={"Send OTP"}
                     type="submit"
                     isloading={isOtpPending}
-                    className="bg-theme"
+                    className="bg-continueButton"
                     variant={"outline"}
                   />
                 </div>
@@ -155,7 +155,7 @@ const LoginComponent = () => {
                     text={"Login"}
                     type="submit"
                     isloading={isLoginPending}
-                    className="bg-theme"
+                    className="bg-continueButton"
                     variant={"outline"}
                   />
                 </div>

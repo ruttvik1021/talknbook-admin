@@ -1,8 +1,8 @@
-export const unAuthBaseUrl = "http://localhost:3000";
-// export const unAuthBaseUrl = "https://talk-n-book.onrender.com";
+// export const unAuthBaseUrl = "http://localhost:3000";
+export const unAuthBaseUrl = "https://talk-n-book.onrender.com";
 
-export const authBaseUrl = "http://localhost:3000/api";
-// export const authBaseUrl = "https://talk-n-book.onrender.com/api";
+// export const authBaseUrl = "http://localhost:3000/api";
+export const authBaseUrl = "https://talk-n-book.onrender.com/api";
 
 export const urls = {
   sentOtp: "/otp/admin/sendotp",
