@@ -105,14 +105,13 @@ const UserDetailsComponent = ({ userId }: { userId: string }) => {
                   {subLabels("Specialization")}
                   <p>{spec.specializationId}</p>
                   {spec.certificates.map((certificate: any, index: number) => (
-                    <div className="flex mt-5 items-center">
+                    <div className="flex mt-5 items-center" key={certificate}>
                       <img
                         src={`${certificate}`}
                         width={100}
                         height={100}
                         alt={`Certificate ${index + 1}`}
                         onClick={() => window.open(certificate)}
-                        key={certificate}
                       />
                     </div>
                   ))}
