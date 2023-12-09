@@ -22,6 +22,7 @@ module.exports = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {
+        pageTitle: "#000000",
         continueButton: "#22c55e",
         loginBgTheme: "#e7ecef",
         theme: "#cbf3f0",

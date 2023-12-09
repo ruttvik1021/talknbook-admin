@@ -8,17 +8,18 @@ export default function AdminLayout({
 }) {
   return (
     <div className="flex h-screen">
-      {/* Sidebar */}
-      <div className="hidden md:block w-1/6">
+      {/* Sidebar (hidden on small screens) */}
+      <div className="hidden sm:block md:w-1/6">
         <Sidebar />
       </div>
 
       {/* Main Content */}
-      <div className="w-5/6 p-4">
-        <div className="md:hidden">
+      <div className="w-full sm:w-5/6">
+        {/* TopBar (visible on small screens) */}
+        <div className="sm:hidden ">
           <TopBar />
         </div>
-        <div>{children}</div>
+        <div className="p-4">{children}</div>
       </div>
     </div>
   );

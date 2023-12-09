@@ -17,13 +17,18 @@ import { routes } from "@/utils/urls";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import NavLink from "../navlink";
+import Menu from "@/components/icons/menu";
 
 const TopBar = () => {
   const router = useRouter();
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Open</Button>
+        <div className="bg-black">
+          <Button className="text-sm text-white" variant="link">
+            <Menu />
+          </Button>
+        </div>
       </SheetTrigger>
       <SheetContent side="left" className="bg-gray-900 text-white">
         <SheetHeader>
