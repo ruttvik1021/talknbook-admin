@@ -37,6 +37,7 @@ const UsersComponent = () => {
     data: usersList,
     isFetching: isUsersLoading,
     refetch: refetchUsers,
+    isError: usersListError,
   } = useQuery({
     queryKey: ["users", initialPayload],
     queryFn: () => getUsers(initialPayload),
@@ -45,9 +46,13 @@ const UsersComponent = () => {
 
   return (
     <>
-      <PageTitle title={"Users Page"} onClick={() => refetchUsers()} />
+      <PageTitle
+        title={`Users Page (${usersList?.data.total || 0})`}
+        onClick={() => refetchUsers()}
+      />
       {isUsersLoading && <p>Loading...</p>}
-      {usersList && !isUsersLoading && (
+      {usersListError && <p>Error while fetching data.</p>}
+      {usersList?.data.users.length && !isUsersLoading ? (
         <>
           <Table className="w-full border">
             <TableHeader className="bg-slate-300">
@@ -101,7 +106,8 @@ const UsersComponent = () => {
             </TableBody>
           </Table>
         </>
-      )}
+      ) : null}
+      {!usersList?.data.users.length && !isUsersLoading && <p>No Data</p>}
     </>
   );
 };
