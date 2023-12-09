@@ -1,8 +1,7 @@
 "use client";
 
-import { unAuthBaseUrl, urls } from "@/utils/urls";
+import { loginFn, sendOtptoEmail } from "@/utils/apis";
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 import { FormikProvider, useFormik } from "formik";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -19,13 +18,6 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Label } from "../ui/label";
-
-const sendOtptoEmail = async (values: any) => {
-  return await axios.post(unAuthBaseUrl + urls.sentOtp, values);
-};
-const loginFn = async (values: any) => {
-  return await axios.post(unAuthBaseUrl + urls.validateOtp, values);
-};
 
 const LoginComponent = () => {
   const route = useRouter();
