@@ -8,6 +8,9 @@ export const urls = {
   sentOtp: "/otp/admin/sendotp",
   validateOtp: "/otp/validateotp",
   getAllUsers: "/allUsers",
+  getAllSpecializations: "/master/specializations",
+  getUserById: "/user",
+  deactivateUserById: "/deactivate/user",
 };
 
 export const routes = [

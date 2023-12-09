@@ -1,4 +1,5 @@
 import { Label } from "../ui/label";
+import { Separator } from "../ui/separator";
 
 interface IPageTitle {
   title: string;
@@ -9,9 +10,17 @@ const PageTitle = (props: IPageTitle) => {
   const { title, onClick } = props;
   return (
     <>
-      <Label onClick={onClick} className={onClick ? "cursor-pointer" : ""}>
-        {title}
-      </Label>
+      <div>
+        <Label
+          onClick={onClick}
+          className={`text-3xl text-pageTitle border-pageTitle border-b-2 ${
+            onClick ? "cursor-pointer" : ""
+          }`}
+        >
+          {title}
+        </Label>
+        <Separator className="mb-5" />
+      </div>
     </>
   );
 };
