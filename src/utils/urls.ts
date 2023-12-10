@@ -9,10 +9,13 @@ export const urls = {
   validateOtp: "/otp/validateotp",
   getAllUsers: "/allUsers",
   getAllSpecializations: "/master/specializations",
+  getAllLanguages: "/master/languages",
+  updateLanguage: "/master/language/",
   getUserById: "/user",
   deactivateUserById: "/deactivate/user",
   updateSpecialization: "/master/specialization/",
-  addSpecialization: "/master/add/specializations",
+  addSpecialization: "/master/add/specialization",
+  addLanguage: "/master/add/language",
 };
 
 export const routes = [

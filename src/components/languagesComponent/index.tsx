@@ -1,9 +1,9 @@
 "use client";
 import {
-  addSpecializationApi,
-  deleteSpecializationApi,
-  getAllSpecializations,
-  updateSpecializationsApi,
+  addLanguageApi,
+  deleteLanguageApi,
+  getAllLanguages,
+  updateLanguageApi,
 } from "@/utils/apis";
 import {
   keepPreviousData,
@@ -33,7 +33,7 @@ import {
   TableRow,
 } from "../ui/table";
 
-const SpecializationComponent = () => {
+const LanguagesComponent = () => {
   const query = useQueryClient();
   const [createModal, setCreateModal] = useState(false);
   const [updatingRowId, setUpdatingRowId] = useState(null);
@@ -43,69 +43,69 @@ const SpecializationComponent = () => {
   });
 
   const {
-    data: specializations,
+    data: languagesList,
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["specializations", initialPayload],
-    queryFn: () => getAllSpecializations(initialPayload),
+    queryKey: ["languages", initialPayload],
+    queryFn: () => getAllLanguages(initialPayload),
     placeholderData: keepPreviousData,
   });
 
-  const { mutate: updateSpecialization } = useMutation({
-    mutationFn: ({ specializationId, item }: any) => {
-      return updateSpecializationsApi({ specializationId, item });
+  const { mutate: updateLanguage } = useMutation({
+    mutationFn: ({ langId, item }: any) => {
+      return updateLanguageApi({ langId, item });
     },
     onSuccess: () => {
-      query.invalidateQueries({ queryKey: ["specializations"] });
+      query.invalidateQueries({ queryKey: ["languages"] });
       setUpdatingRowId(null);
     },
   });
 
-  const { mutate: deleteSpecialization, isPending: isDeletingSpecialization } =
-    useMutation({
+  const { mutate: deleteLanguage, isPending: isDeletingLanguage } = useMutation(
+    {
       mutationFn: (id: string) => {
-        return deleteSpecializationApi(id);
+        return deleteLanguageApi(id);
       },
       onSuccess: () => {
-        query.invalidateQueries({ queryKey: ["specializations"] });
+        query.invalidateQueries({ queryKey: ["languages"] });
       },
-    });
+    }
+  );
 
-  const { mutate: addSpecialization, isPending: isAddingSpecialization } =
-    useMutation({
-      mutationFn: (values: any) => {
-        return addSpecializationApi(values);
-      },
-      onSuccess: () => {
-        query.invalidateQueries({ queryKey: ["specializations"] });
-        setCreateModal(false);
-        formik.resetForm();
-      },
-    });
+  const { mutate: addLanguage, isPending: isAddingLanguage } = useMutation({
+    mutationFn: (values: any) => {
+      return addLanguageApi(values);
+    },
+    onSuccess: () => {
+      query.invalidateQueries({ queryKey: ["languages"] });
+      setCreateModal(false);
+      formik.resetForm();
+    },
+  });
 
   const validationSchema = Yup.object().shape({
-    specialization: Yup.string().required("Name is required"),
+    language: Yup.string().required("Name is required"),
   });
 
   const formik = useFormik({
     initialValues: {
-      specialization: "",
+      language: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      addSpecialization(values);
+      addLanguage(values);
     },
   });
 
-  const addSpecializationForm = () => {
+  const addLanguageForm = () => {
     return (
       <FormikProvider value={formik}>
         <Form>
-          <Field name="specialization">
+          <Field name="language">
             {({ field, meta }: FieldProps) => (
               <div>
-                <Input type="text" placeholder="Specialization" {...field} />
+                <Input type="text" placeholder="Language" {...field} />
                 {meta.touched && meta.error && (
                   <Label className="text-red-500">{meta.error}</Label>
                 )}
@@ -116,7 +116,7 @@ const SpecializationComponent = () => {
             <Button
               type="button"
               variant="outline"
-              disabled={isAddingSpecialization}
+              disabled={isAddingLanguage}
               onClick={() => {
                 formik.resetForm();
                 setCreateModal(false);
@@ -130,7 +130,7 @@ const SpecializationComponent = () => {
               variant="default"
               onClick={() => formik.handleSubmit}
               text={"Submit"}
-              isloading={isAddingSpecialization}
+              isloading={isAddingLanguage}
             />
           </div>
         </Form>
@@ -142,20 +142,16 @@ const SpecializationComponent = () => {
     return (
       <>
         <PageTitle
-          title={`Specializations (${
-            isLoading ? 0 : specializations?.data.total
-          })`}
-          onClick={() =>
-            query.invalidateQueries({ queryKey: ["specializations"] })
-          }
+          title={`Languages (${isLoading ? 0 : languagesList?.data.total})`}
+          onClick={() => query.invalidateQueries({ queryKey: ["languages"] })}
         />
 
         <div className="flex justify-end mb-5">
           <CreateDialog
             buttonText={"Add New"}
-            title={"Add Specialization"}
-            description={"Enter name of specialization"}
-            form={addSpecializationForm()}
+            title={"Add Language"}
+            description={"Enter name of language"}
+            form={addLanguageForm()}
             open={createModal}
             setCreateModal={setCreateModal}
           />
@@ -183,8 +179,8 @@ const SpecializationComponent = () => {
   }
 
   if (
-    !specializations?.data.specializations ||
-    specializations.data.specializations.length === 0
+    !languagesList?.data.languages ||
+    languagesList.data.languages.length === 0
   ) {
     return (
       <>
@@ -206,37 +202,37 @@ const SpecializationComponent = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {specializations.data.specializations.map((spec: any) => (
-            <TableRow key={spec.id} className="border-slate-300 border-b-2">
-              <TableCell>{spec.specialization}</TableCell>
+          {languagesList.data.languages.map((lang: any) => (
+            <TableRow key={lang.id} className="border-slate-300 border-b-2">
+              <TableCell>{lang.language}</TableCell>
               <TableCell>
-                <StatusBadge status={spec.isActive} type="Active/Inactive" />
+                <StatusBadge status={lang.isActive} type="Active/Inactive" />
               </TableCell>
               <TableCell className="flex items-center gap-5">
                 <Switch
-                  disabled={updatingRowId === spec.id}
-                  checked={spec.isActive}
+                  disabled={updatingRowId === lang.id}
+                  checked={lang.isActive}
                   onCheckedChange={(e) => {
-                    setUpdatingRowId(spec.id);
-                    updateSpecialization({
-                      specializationId: spec.id,
-                      item: { ...spec, isActive: e },
+                    setUpdatingRowId(lang.id);
+                    updateLanguage({
+                      langId: lang.id,
+                      item: { ...lang, isActive: e },
                     });
                   }}
                 />
                 <p>
                   <ConfirmationDialog
                     render={<DeleteIcon className="cursor-pointer" />}
-                    title="Are you sure you want to delete specialization ?"
-                    description={`${spec.specialization} will be deleted.`}
+                    title="Are you sure you want to delete language ?"
+                    description={`${lang.language} will be deleted.`}
                     cancelRender={"Cancel"}
                     confirmRender={
                       <LoadingButton
                         variant="destructive"
-                        disabled={isDeletingSpecialization}
-                        onClick={() => deleteSpecialization(spec.id)}
+                        disabled={isDeletingLanguage}
+                        onClick={() => deleteLanguage(lang.id)}
                         text={"Confirm"}
-                        isloading={isDeletingSpecialization}
+                        isloading={isDeletingLanguage}
                       />
                     }
                   />
@@ -250,4 +246,4 @@ const SpecializationComponent = () => {
   );
 };
 
-export default SpecializationComponent;
+export default LanguagesComponent;

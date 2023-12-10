@@ -10,7 +10,7 @@ const authHeaders = {
   },
 };
 
-// Login Page
+// Login Apis
 
 export const sendOtptoEmail = async (values: any) => {
   const url = unAuthBaseUrl + urls.sentOtp;
@@ -22,13 +22,15 @@ export const loginFn = async (values: any) => {
   return await axios.post(url, values);
 };
 
-export const getUsers = async (values: any) => {
-  const url = authBaseUrl + urls.getAllUsers;
-  return axios.post(url, values, { ...authHeaders });
-};
+// Specialization Apis
 
 export const getAllSpecializations = async (values: any) => {
   const url = authBaseUrl + urls.getAllSpecializations;
+  return axios.post(url, values, { ...authHeaders });
+};
+
+export const addSpecializationApi = async (values: any) => {
+  const url = authBaseUrl + urls.addSpecialization;
   return axios.post(url, values, { ...authHeaders });
 };
 
@@ -45,8 +47,32 @@ export const deleteSpecializationApi = async (id: string) => {
   return axios.delete(url, { ...authHeaders });
 };
 
-export const addSpecializationApi = async (values: any) => {
-  const url = authBaseUrl + urls.addSpecialization;
+// Languages Apis
+
+export const getAllLanguages = async (values: any) => {
+  const url = authBaseUrl + urls.getAllLanguages;
+  return axios.post(url, values, { ...authHeaders });
+};
+
+export const addLanguageApi = async (values: any) => {
+  const url = authBaseUrl + urls.addLanguage;
+  return axios.post(url, values, { ...authHeaders });
+};
+
+export const updateLanguageApi = async ({ langId, item }: any) => {
+  const url = authBaseUrl + urls.updateLanguage + langId;
+  return axios.put(url, { ...item }, { ...authHeaders });
+};
+
+export const deleteLanguageApi = async (id: string) => {
+  const url = authBaseUrl + urls.updateLanguage + id;
+  return axios.delete(url, { ...authHeaders });
+};
+
+// User Apis
+
+export const getUsers = async (values: any) => {
+  const url = authBaseUrl + urls.getAllUsers;
   return axios.post(url, values, { ...authHeaders });
 };
 
