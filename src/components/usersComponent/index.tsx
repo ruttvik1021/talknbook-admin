@@ -9,7 +9,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getUsers } from "@/utils/apis";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import PageTitle from "../pagetitle";
@@ -17,6 +21,7 @@ import StatusBadge from "../statusBadge";
 import { Avatar, AvatarImage } from "../ui/avatar";
 
 const UsersComponent = () => {
+  const query = useQueryClient();
   const router = useRouter();
   const [initialPayload, setInitialPayload] = useState({
     limit: 10,
@@ -34,7 +39,6 @@ const UsersComponent = () => {
   const {
     data: usersList,
     isFetching: isUsersLoading,
-    refetch: refetchUsers,
     isError: usersListError,
   } = useQuery({
     queryKey: ["users", initialPayload],
@@ -48,7 +52,7 @@ const UsersComponent = () => {
     <>
       <PageTitle
         title={`Users Page (${usersList?.data.total || 0})`}
-        onClick={() => refetchUsers()}
+        onClick={() => query.invalidateQueries({ queryKey: ["users"] })}
       />
       {isUsersLoading && <p>Loading...</p>}
       {usersListError && <p>Error while fetching data.</p>}

@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 type IDialog = {
   title: string;
   description: string;
-  onConfirmClick: () => void;
   render: React.ReactNode;
   cancelRender: React.ReactNode;
   confirmRender: React.ReactNode;
@@ -23,25 +22,26 @@ type IDialog = {
 const ConfirmationDialog = ({
   title,
   description,
-  onConfirmClick,
   render,
   cancelRender,
   confirmRender,
 }: IDialog) => {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>{render}</AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{description}</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>{cancelRender}</AlertDialogCancel>
-          {confirmRender}
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <>
+      <AlertDialog>
+        <AlertDialogTrigger asChild>{render}</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{title}</AlertDialogTitle>
+            <AlertDialogDescription>{description}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{cancelRender}</AlertDialogCancel>
+            {confirmRender}
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 };
 

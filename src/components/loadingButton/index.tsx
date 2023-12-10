@@ -18,6 +18,7 @@ const LoadingButton = (props: IButtonProps) => {
       disabled={props.isloading}
       onClick={props.onClick}
       className={`flex justify-center items-center ${props.className}`}
+      {...props}
     >
       {isloading ? <LoadingIcon className="w-6 h-6 animate-spin" /> : text}
     </Button>
