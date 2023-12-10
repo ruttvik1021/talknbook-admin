@@ -1,22 +1,20 @@
 "use client";
 
-import { getAllSpecializations, getUsers } from "@/utils/apis";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import PageTitle from "../pagetitle";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Image from "next/image";
-import { Avatar, AvatarImage } from "../ui/avatar";
-import StatusBadge from "../statusBadge";
+import { getUsers } from "@/utils/apis";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import PageTitle from "../pagetitle";
+import StatusBadge from "../statusBadge";
+import { Avatar, AvatarImage } from "../ui/avatar";
 
 const UsersComponent = () => {
   const router = useRouter();
@@ -42,6 +40,8 @@ const UsersComponent = () => {
     queryKey: ["users", initialPayload],
     queryFn: () => getUsers(initialPayload),
     enabled: true,
+    staleTime: 20000,
+    placeholderData: keepPreviousData,
   });
 
   return (

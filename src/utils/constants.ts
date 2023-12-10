@@ -6,5 +6,5 @@ export enum ROLES {
 export type navRoute = {
   label: string;
   href: string;
-  icon: string;
+  subRoutes?: { label: string; href: string }[];
 };
