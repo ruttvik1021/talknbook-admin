@@ -1,14 +1,12 @@
 "use client";
 
-import { deactivateUser, getUserDetails } from "@/utils/apis";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { getUserDetails } from "@/utils/apis";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import PageTitle from "../pagetitle";
 import { Avatar, AvatarImage } from "../ui/avatar";
 import { Checkbox } from "../ui/checkbox";
 import { Label } from "../ui/label";
-import { useState } from "react";
-import Image from "next/image";
 
 const UserDetailsComponent = ({ userId }: { userId: string }) => {
   const {
@@ -19,6 +17,8 @@ const UserDetailsComponent = ({ userId }: { userId: string }) => {
     queryKey: [`userDetails-${userId}`],
     queryFn: () => getUserDetails(userId),
     enabled: true,
+    placeholderData: keepPreviousData,
+    staleTime: 10000,
   });
   const router = useRouter();
 

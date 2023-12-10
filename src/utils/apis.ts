@@ -27,9 +27,27 @@ export const getUsers = async (values: any) => {
   return axios.post(url, values, { ...authHeaders });
 };
 
-export const getAllSpecializations = async () => {
+export const getAllSpecializations = async (values: any) => {
   const url = authBaseUrl + urls.getAllSpecializations;
-  return axios.get(url, { ...authHeaders });
+  return axios.post(url, values, { ...authHeaders });
+};
+
+export const updateSpecializationsApi = async ({
+  specializationId,
+  item,
+}: any) => {
+  const url = authBaseUrl + urls.updateSpecialization + specializationId;
+  return axios.put(url, { ...item }, { ...authHeaders });
+};
+
+export const deleteSpecializationApi = async (id: string) => {
+  const url = authBaseUrl + urls.updateSpecialization + id;
+  return axios.delete(url, { ...authHeaders });
+};
+
+export const addSpecializationApi = async (values: any) => {
+  const url = authBaseUrl + urls.addSpecialization;
+  return axios.post(url, values, { ...authHeaders });
 };
 
 export const getUserDetails = async (userId: string) => {

@@ -42,7 +42,11 @@ const TopBar = () => {
         <div className="pl-5 text-left">
           {routes.map((item: navRoute, index: number) => (
             <div className="my-5" key={`${item.href}-${index}`}>
-              <NavLink label={item.label} href={item.href} icon={item.icon} />
+              <NavLink
+                label={item.label}
+                href={item.href}
+                subRoutes={item.subRoutes}
+              />
             </div>
           ))}
         </div>

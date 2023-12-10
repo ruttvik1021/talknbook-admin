@@ -1,4 +1,4 @@
-import Sidebar from "@/components/navbars";
+import Sidebar from "@/components/navbars/sidebar";
 import TopBar from "@/components/navbars/topbar";
 
 export default function AdminLayout({

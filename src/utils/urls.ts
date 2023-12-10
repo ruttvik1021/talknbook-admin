@@ -11,6 +11,8 @@ export const urls = {
   getAllSpecializations: "/master/specializations",
   getUserById: "/user",
   deactivateUserById: "/deactivate/user",
+  updateSpecialization: "/master/specialization/",
+  addSpecialization: "/master/add/specializations",
 };
 
 export const routes = [
@@ -18,6 +20,14 @@ export const routes = [
     label: "Dashboard",
     href: "/admin",
     icon: "",
+  },
+  {
+    label: "Master",
+    href: "/admin/master/languages",
+    subRoutes: [
+      { label: "Languages", href: "/admin/master/languages" },
+      { label: "Specializations", href: "/admin/master/specializations" },
+    ],
   },
   {
     label: "Users",

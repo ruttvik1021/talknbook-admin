@@ -4,8 +4,8 @@ import { navRoute } from "@/utils/constants";
 import { routes } from "@/utils/urls";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
-import { Button } from "../ui/button";
-import NavLink from "./navlink";
+import { Button } from "../../ui/button";
+import NavLink from "../navlink";
 const Sidebar = () => {
   const router = useRouter();
   return (
@@ -17,7 +17,11 @@ const Sidebar = () => {
       <div className="pl-5">
         {routes.map((item: navRoute, index: number) => (
           <div className="my-5" key={`${item.href}-${index}`}>
-            <NavLink label={item.label} href={item.href} icon={item.icon} />
+            <NavLink
+              label={item.label}
+              href={item.href}
+              subRoutes={item.subRoutes}
+            />
           </div>
         ))}
       </div>
