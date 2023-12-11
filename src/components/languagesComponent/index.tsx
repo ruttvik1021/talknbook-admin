@@ -32,6 +32,8 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { toast } from "../ui/use-toast";
+import { AxiosError } from "axios";
 
 const LanguagesComponent = () => {
   const query = useQueryClient();
@@ -52,13 +54,20 @@ const LanguagesComponent = () => {
     placeholderData: keepPreviousData,
   });
 
-  const { mutate: updateLanguage } = useMutation({
+  const { mutate: updateLanguage, error: updateError } = useMutation({
     mutationFn: ({ langId, item }: any) => {
       return updateLanguageApi({ langId, item });
     },
-    onSuccess: () => {
+    onSuccess() {
       query.invalidateQueries({ queryKey: ["languages"] });
       setUpdatingRowId(null);
+    },
+    onError(error: AxiosError) {
+      const { message } = error.response?.data as any;
+      toast({
+        variant: "destructive",
+        title: message,
+      });
     },
   });
 
@@ -69,6 +78,13 @@ const LanguagesComponent = () => {
       },
       onSuccess: () => {
         query.invalidateQueries({ queryKey: ["languages"] });
+      },
+      onError(error: AxiosError) {
+        const { message } = error.response?.data as any;
+        toast({
+          variant: "destructive",
+          title: message,
+        });
       },
     }
   );
@@ -81,6 +97,13 @@ const LanguagesComponent = () => {
       query.invalidateQueries({ queryKey: ["languages"] });
       setCreateModal(false);
       formik.resetForm();
+    },
+    onError(error: AxiosError) {
+      const { message } = error.response?.data as any;
+      toast({
+        variant: "destructive",
+        title: message,
+      });
     },
   });
 
@@ -125,7 +148,7 @@ const LanguagesComponent = () => {
               Cancel
             </Button>
             <LoadingButton
-              type="button"
+              type="submit"
               className="btn"
               variant="default"
               onClick={() => formik.handleSubmit}
@@ -141,12 +164,11 @@ const LanguagesComponent = () => {
   const pageHeader = () => {
     return (
       <>
-        <PageTitle
-          title={`Languages (${isLoading ? 0 : languagesList?.data.total})`}
-          onClick={() => query.invalidateQueries({ queryKey: ["languages"] })}
-        />
-
-        <div className="flex justify-end mb-5">
+        <div className="flex justify-between items-end mb-5">
+          <PageTitle
+            title={`Languages (${isLoading ? 0 : languagesList?.data.total})`}
+            onClick={() => query.invalidateQueries({ queryKey: ["languages"] })}
+          />
           <CreateDialog
             buttonText={"Add New"}
             title={"Add Language"}

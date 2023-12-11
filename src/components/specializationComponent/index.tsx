@@ -32,6 +32,8 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
+import { AxiosError } from "axios";
+import { toast } from "../ui/use-toast";
 
 const SpecializationComponent = () => {
   const query = useQueryClient();
@@ -60,6 +62,13 @@ const SpecializationComponent = () => {
       query.invalidateQueries({ queryKey: ["specializations"] });
       setUpdatingRowId(null);
     },
+    onError(error: AxiosError) {
+      const { message } = error.response?.data as any;
+      toast({
+        variant: "destructive",
+        title: message,
+      });
+    },
   });
 
   const { mutate: deleteSpecialization, isPending: isDeletingSpecialization } =
@@ -69,6 +78,13 @@ const SpecializationComponent = () => {
       },
       onSuccess: () => {
         query.invalidateQueries({ queryKey: ["specializations"] });
+      },
+      onError(error: AxiosError) {
+        const { message } = error.response?.data as any;
+        toast({
+          variant: "destructive",
+          title: message,
+        });
       },
     });
 
@@ -81,6 +97,13 @@ const SpecializationComponent = () => {
         query.invalidateQueries({ queryKey: ["specializations"] });
         setCreateModal(false);
         formik.resetForm();
+      },
+      onError(error: AxiosError) {
+        const { message } = error.response?.data as any;
+        toast({
+          variant: "destructive",
+          title: message,
+        });
       },
     });
 
@@ -125,7 +148,7 @@ const SpecializationComponent = () => {
               Cancel
             </Button>
             <LoadingButton
-              type="button"
+              type="submit"
               className="btn"
               variant="default"
               onClick={() => formik.handleSubmit}
@@ -141,16 +164,15 @@ const SpecializationComponent = () => {
   const pageHeader = () => {
     return (
       <>
-        <PageTitle
-          title={`Specializations (${
-            isLoading ? 0 : specializations?.data.total
-          })`}
-          onClick={() =>
-            query.invalidateQueries({ queryKey: ["specializations"] })
-          }
-        />
-
-        <div className="flex justify-end mb-5">
+        <div className="flex justify-between items-end mb-5">
+          <PageTitle
+            title={`Specializations (${
+              isLoading ? 0 : specializations?.data.total
+            })`}
+            onClick={() =>
+              query.invalidateQueries({ queryKey: ["specializations"] })
+            }
+          />
           <CreateDialog
             buttonText={"Add New"}
             title={"Add Specialization"}

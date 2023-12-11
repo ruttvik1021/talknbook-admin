@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { AlertDialogCancel } from "../ui/alert-dialog";
 
 type ICreateDialog = {
   buttonText: string;
@@ -27,7 +29,7 @@ const CreateDialog = ({
   return (
     <Dialog open={open}>
       <DialogTrigger>
-        <Button variant="outline" onClick={() => setCreateModal(true)}>
+        <Button variant="success" onClick={() => setCreateModal(true)}>
           {buttonText}
         </Button>
       </DialogTrigger>

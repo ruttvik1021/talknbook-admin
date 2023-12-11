@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { authBaseUrl, unAuthBaseUrl, urls } from "./urls";
 import Cookies from "js-cookie";
 
