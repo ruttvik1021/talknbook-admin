@@ -62,7 +62,7 @@ const LoginComponent = () => {
   const { mutate: login, isPending: isLoginPending } = useMutation({
     mutationFn: loginFn,
     onSuccess: async (res: any) => {
-      Cookies.set("token", res?.data?.accessToken);
+      await Cookies.set("token", res?.data?.accessToken);
       route.push("/admin");
     },
     onError: (error: any) => {
